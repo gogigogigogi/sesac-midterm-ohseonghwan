@@ -8,7 +8,7 @@ exports.readAll = async (req, res) => {
     res.json(result);
   } catch (error) {
     res.status(500).json({
-      message: '서버 에러(todo 조회)',
+      message: 'Internal Server Error',
     });
   }
 };
@@ -44,7 +44,7 @@ exports.create = async (req, res) => {
       title,
       done,
     });
-    console.log('필드가 없을떄', result);
+
     res.json(result);
   } catch (error) {
     res.status(500).json({
@@ -59,18 +59,6 @@ exports.update = async (req, res) => {
     const { id } = req.params;
     const { title, done } = req.body;
 
-    const findResult = await Todo.findOne({
-      where: {
-        id,
-      },
-    });
-
-    if (!findResult) {
-      return res.json({
-        message: 'Todo not found',
-      });
-    }
-
     const updateResult = await Todo.update(
       {
         title,
@@ -82,7 +70,7 @@ exports.update = async (req, res) => {
         },
       }
     );
-    console.log('변경 결과는 ', updateResult);
+
     if (updateResult[0]) {
       const findNewResult = await Todo.findOne({
         where: {
@@ -91,7 +79,9 @@ exports.update = async (req, res) => {
       });
       res.json(findNewResult);
     } else {
-      res.json('변경된 값이 없습니다.');
+      res.json({
+        message: 'Todo not found',
+      });
     }
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
@@ -103,7 +93,7 @@ exports.delete = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await Todo.destroy({ where: { id } });
-    console.log('결과는', result);
+
     if (result) {
       res.json({
         message: 'Todo deleted successfully',
