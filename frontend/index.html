@@ -15,15 +15,17 @@
     <link rel="stylesheet" href="./public/index.css" />
   </head>
   <body>
-    <header>
-      <img src="./public/codingon.png" alt="coding-on" />
-      <div>Todo List</div>
-    </header>
-    <div class="input-title-container">
-      <input class="input-title" type="text" placeholder="today's todo" />
-      <button onclick="addTodo(event)">작성</button>
-    </div>
+    <main class="todoListContainer">
+      <header>
+        <img src="./public/codingon.png" alt="coding-on" />
+        <div>Todo List</div>
+      </header>
+      <div class="input-title-container">
+        <input class="input-title" type="text" placeholder="today's todo" />
+        <button onclick="addTodo(event)">작성</button>
+      </div>
 
-    <div class="todoContainer"></div>
+      <div class="todoContainer"></div>
+    </main>
   </body>
 </html>
