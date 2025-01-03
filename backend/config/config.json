@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "user_10",
+    "password": "codingon_10",
+    "database": "db_10",
+    "host": "sesac-evaluation.cn6ww0owo0vr.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql"
+  }
+}
