@@ -38,17 +38,17 @@ exports.create = async (req, res) => {
   try {
     const { title, done } = req.body;
     if (!title) {
-      throw new Error('Internal Server Error');
+      throw new Error();
     }
     const result = await Todo.create({
       title,
       done,
     });
-
+    console.log('필드가 없을떄', result);
     res.json(result);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
+      message: 'Internal Server Error',
     });
   }
 };
@@ -82,7 +82,7 @@ exports.update = async (req, res) => {
         },
       }
     );
-
+    console.log('변경 결과는 ', updateResult);
     if (updateResult[0]) {
       const findNewResult = await Todo.findOne({
         where: {
@@ -91,7 +91,7 @@ exports.update = async (req, res) => {
       });
       res.json(findNewResult);
     } else {
-      res.json('변경될 값이 없습니다.');
+      res.json('변경된 값이 없습니다.');
     }
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
